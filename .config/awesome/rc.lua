@@ -11,6 +11,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local scratch = require("scratch")
+local APW = require("apw/widget")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -108,9 +109,9 @@ end
 -- Define a tag table which hold all screen tags.
 tags = {}
 
-tags[1] = awful.tag({ "WebStorm", 2, 3, "Skype", 5, 6, 7, 8, 9 }, s, layouts[1])
+tags[1] = awful.tag({ "WebStorm", 2, 3, "Skype", 5, 6, 7, 8, 9 }, 1, layouts[1])
 if (screen.count() > 1) then
-  tags[2] = awful.tag({ "Browser", 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+  tags[2] = awful.tag({ "Browser", 2, 3, 4, 5, 6, 7, 8, 9 }, 2, layouts[1])
 end
 
 -- {{{ Menu
@@ -262,6 +263,10 @@ globalkeys = awful.util.table.join(
           awful.client.focus.byidx(-1)
           if client.focus then client.focus:raise() end
       end),
+  -- Volume control
+    awful.key({ }, "XF86AudioRaiseVolume",  APW.Up),
+    awful.key({ }, "XF86AudioLowerVolume",  APW.Down),
+    awful.key({ }, "XF86AudioMute",         APW.ToggleMute),
 
   -- Layout manipulation
   awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
@@ -445,10 +450,12 @@ awful.rules.rules = {
                      buttons = clientbuttons } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
-    { rule = { class = "pinentry" },
+    { rule = { class = "pinenxproptry" },
       properties = { floating = true } },
     { rule = { class = "Skype" },
       properties = { tag = tags[1][4], floating = true } },
+    { rule = { class = "jetbrains-webstorm" },
+        properties = { tag = tags[1][1], floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
     -- Set Firefox to always map on tags number 2 of screen 1.
