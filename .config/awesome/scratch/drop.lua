@@ -54,21 +54,17 @@ function toggle(prog, vert, horiz, width, height, sticky, screen)
     local detach_signal = capi.client.disconnect_signal or capi.client.remove_signal
 
     if not dropdown[prog] then
-        dropdown[prog] = {}
-
         -- Add unmanage signal for scratchdrop programs
         attach_signal("unmanage", function (c)
-            for scr, cl in pairs(dropdown[prog]) do
-                if cl == c then
-                    dropdown[prog][scr] = nil
-                end
+            if dropdown[prog] == c then
+                dropdown[prog] = nil
             end
         end)
     end
 
-    if not dropdown[prog][screen] then
+    if not dropdown[prog] then
         spawnw = function (c)
-            dropdown[prog][screen] = c
+            dropdown[prog] = c
 
             -- Scratchdrop clients are floaters
             awful.client.floating.set(c, true)
@@ -105,7 +101,7 @@ function toggle(prog, vert, horiz, width, height, sticky, screen)
         awful.util.spawn(prog, false)
     else
         -- Get a running client
-        c = dropdown[prog][screen]
+        c = dropdown[prog]
 
         -- Switch the client to the current workspace
         if c:isvisible() == false then c.hidden = true
