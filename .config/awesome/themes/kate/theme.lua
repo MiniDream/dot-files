@@ -8,7 +8,7 @@
 
 -- {{{ Main
 theme = {}
-theme.wallpaper = "/home/kate/.config/awesome/themes/kate/wallpapers/cat.jpg"
+theme.wallpaper = "/home/kate/.config/awesome/themes/kate/wallpapers/march.jpg"
 -- }}}
 
 -- {{{ Styles

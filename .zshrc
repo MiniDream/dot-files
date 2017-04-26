@@ -48,14 +48,11 @@ DISABLE_AUTO_UPDATE="true"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-source /usr/share/zsh/site-contrib/powerline.zsh
+source /usr/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
 # User configuration
 
 PATH=$PATH:~/.gem/ruby/2.1.0/bin
-
-export NVM_DIR="/home/kate/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -85,4 +82,5 @@ export EDITOR='vim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
+alias gpu="gpsup"
+alias ys="yaourt -Syyuua --devel --force --noconfirm"

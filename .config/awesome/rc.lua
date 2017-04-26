@@ -398,13 +398,16 @@ for i = 1, 9 do
                            awful.tag.viewonly(tag)
                         end
                   end),
-        -- Toggle tag.
-        awful.key({ modkey, "Control" }, "#" .. i + 66,
+        -- Switch tags on another screen.
+         awful.key({ modkey, "Control" }, "#" .. i + 66,
                   function ()
-                      local screen = mouse.screen
+                      local screen = 1
+                      if mouse.screen == 1 then 
+                        screen = 2
+                      end
                       local tag = awful.tag.gettags(screen)[i]
                       if tag then
-                         awful.tag.viewtoggle(tag)
+                         awful.tag.viewonly(tag)
                       end
                   end),
         -- Move client to tag.
